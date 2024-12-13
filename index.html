@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Dancing Visualizer</title>
+  <style>
+    :root {
+      --bg-color: #0a0a1a;
+      --bar-base-color: #2a2a4a;
+      --hover-color-1: #00ffff;
+      --hover-color-2: #ff00ff;
+      --shadow-spread: 20px;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: var(--bg-color);
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      perspective: 1000px;
+    }
+    .visualizer {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 15px;
+      width: 90%;
+      max-width: 800px;
+      background: linear-gradient(45deg, rgba(10,10,26,0.8), rgba(20,20,50,0.8));
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+      align-items: end;
+    }
+    .bar {
+      background-color: var(--bar-base-color);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 10px;
+      will-change: transform, background-color;
+      transform-origin: bottom;
+    }
+    @keyframes wiggle {
+      0%, 100% { transform: scaleY(1) rotate(-2deg); }
+      50% { transform: scaleY(1.3) rotate(3deg); }
+    }
+    @keyframes glow-blue {
+      0%, 100% { box-shadow: 0 0 10px rgba(0,255,255,0.3); }
+      50% { box-shadow: 0 0 var(--shadow-spread) var(--hover-color-1); }
+    }
+    @keyframes glow-pink {
+      0%, 100% { box-shadow: 0 0 10px rgba(255,0,255,0.3); }
+      50% { box-shadow: 0 0 var(--shadow-spread) var(--hover-color-2); }
+    }
+    .bar:hover {
+      transform: scaleY(1.5) translateZ(50px);
+      background-color: var(--hover-color-1);
+      box-shadow: 0 0 calc(var(--shadow-spread) * 1.5) var(--hover-color-1);
+      z-index: 10;
+    }
+    .bar:nth-child(even):hover {
+      animation: wiggle 1.5s infinite, glow-pink 2s infinite;
+      background-color: var(--hover-color-2);
+      box-shadow: 0 0 calc(var(--shadow-spread) * 1.5) var(--hover-color-2);
+    }
+    .bar:nth-child(odd):hover {
+      animation: wiggle 1.5s infinite, glow-blue 2s infinite;
+      background-color: var(--hover-color-1);
+      box-shadow: 0 0 calc(var(--shadow-spread) * 1.5) var(--hover-color-1);
+    }
+    .bar:nth-child(1) { height: 180px; }
+    .bar:nth-child(2) { height: 220px; }
+    .bar:nth-child(3) { height: 160px; }
+    .bar:nth-child(4) { height: 240px; }
+    .bar:nth-child(5) { height: 190px; }
+    .bar:nth-child(6) { height: 210px; }
+    .bar:nth-child(7) { height: 170px; }
+    .bar:nth-child(8) { height: 230px; }
+    .bar:nth-child(9) { height: 200px; }
+    .bar:nth-child(10) { height: 250px; }
+  </style>
+</head>
+<body>
+  <div class="visualizer">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+</body>
+</html>
